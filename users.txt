@@ -1,0 +1,44 @@
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  firstname VARCHAR(50) NOT NULL,
+  lastname VARCHAR(50) NOT NULL,
+  dob DATE NOT NULL,
+  email VARCHAR(50) NOT NULL,
+  country VARCHAR(50) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  is_admin TINYINT(1) NOT NULL DEFAULT 0
+);
+
+http://localhost/projektznaor/homepage.php
+
+make sql table for news that will contain an id, author, date of publishing, news title, news text , news image, type of news
+
+CREATE TABLE news (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  author VARCHAR(255) NOT NULL,
+  publish_date DATE NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  text TEXT NOT NULL,
+  image VARCHAR(255) NOT NULL,
+  flair VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE news_titles (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE comments (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  news_id INT NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  comment_text TEXT NOT NULL,
+  posted_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  user_id INT NOT NULL,
+  FOREIGN KEY (news_id) REFERENCES news(id) ON DELETE CASCADE,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+ALTER TABLE comments ADD COLUMN user_id INT NOT NULL;
+
+
